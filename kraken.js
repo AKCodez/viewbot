@@ -44,7 +44,7 @@ const ReleaseTheKraken = async () => {
     const browser = await puppeteer.launch({
         headless: "new",
         args: [`--proxy-server=${newProxyUrl}`, '--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        executablePath: "/usr/bin/google-chrome-stable",  // Adjust this path
         ignoreHTTPSErrors: true,
     });
     const page = await browser.newPage();
