@@ -51,7 +51,7 @@ const ReleaseTheKraken = async () => {
     const userAgent = generateUserAgent()
     await page.setUserAgent(userAgent); // Using the generated User-Agent here
     try {
-        await page.goto('', { timeout: 60000 }); // Increasing timeout to 60 seconds
+        await page.goto('https://www.twitch.tv/venomosa', { timeout: 60000 }); // Increasing timeout to 60 seconds
         const randomTimeout = generateRandomTimeout();
         console.log(`Random timeout generated: ${randomTimeout} milliseconds`); // Output will be a random number between 1000 and 8000
         const timeout = setTimeout(async () => {
