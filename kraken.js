@@ -18,30 +18,31 @@ let currentIndex = Number(process.env.start_index);
 let endIndex = Number(process.env.end_index);
 const ReleaseTheKraken = async () => {
     const proxy = proxyArr[currentIndex];
-    try {
-    console.log({currentIndex, start: process.env.start_index, end: process.env.end_index})
     if (currentIndex >= endIndex) {
         console.log('All proxies have been used.');
         clearInterval(interval);
         return;
     }
-    console.log('annoning proxy')
-    const newProxyUrl = await proxyChain.anonymizeProxy(`http://${proxy}`);
-    console.log('launching browser')
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: [`--proxy-server=${newProxyUrl}`, '--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: "/usr/bin/google-chrome-stable",  // Adjust this path
-        // executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-        ignoreHTTPSErrors: true,
-    });
-    console.log('navigating to page')
-    const page = await browser.newPage();
-    const userAgent = generateUserAgent()
-    console.log('setting user agent...')
-    await page.setUserAgent(userAgent); // Using the generated User-Agent here
-    console.log('set user agent... going to page ')
-        await page.goto('https://www.twitch.tv/thiccsnorlex', { timeout: 60000 }); // Increasing timeout to 60 seconds
+    try {
+        console.log({ currentIndex, start: process.env.start_index, end: process.env.end_index })
+        console.log('annoning proxy')
+        const newProxyUrl = await proxyChain.anonymizeProxy(`http://${proxy}`);
+        console.log('launching browser')
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: [`--proxy-server=${newProxyUrl}`, '--no-sandbox', '--disable-setuid-sandbox'],
+            executablePath: "/usr/bin/google-chrome-stable",  // Adjust this path
+            // executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+            ignoreHTTPSErrors: true,
+        });
+        console.log('navigating to page')
+        const page = await browser.newPage();
+        const userAgent = generateUserAgent()
+        console.log('setting user agent...')
+        await page.setUserAgent(userAgent); // Using the generated User-Agent here
+        console.log('set user agent... going to page ')
+
+        await page.goto('https://www.twitch.tv/supersensaiyan', { timeout: 60000 }); // Increasing timeout to 60 seconds
         console.log(`#${currentIndex} BROWSER WATCHING STREAM.... MOVING TO NEXT BROWSER \n\n`);
         currentIndex++;
     } catch (error) {
