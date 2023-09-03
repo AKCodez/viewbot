@@ -18,35 +18,39 @@ let count = 0
 let currentIndex = Number(process.env.start_index);
 let endIndex = Number(process.env.end_index);
 const ReleaseTheKraken = async () => {
+    const proxy = proxyArr[currentIndex];
     try {
-    console.log({currentIndex})
+    console.log({currentIndex, count, start: process.env.start_index, end: process.env.end_index})
     if (currentIndex >= endIndex) {
         console.log('All proxies have been used.');
         clearInterval(interval);
         return;
     }
-    const proxy = proxyArr[currentIndex];
     console.log('annoning proxy')
     const newProxyUrl = await proxyChain.anonymizeProxy(`http://${proxy}`);
     console.log('launching browser')
     const browser = await puppeteer.launch({
         headless: "new",
         args: [`--proxy-server=${newProxyUrl}`, '--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath: "/usr/bin/google-chrome-stable",  // Adjust this path
+        // executablePath: "/usr/bin/google-chrome-stable",  // Adjust this path
+        executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
         ignoreHTTPSErrors: true,
     });
+    console.log('navigating to page')
     const page = await browser.newPage();
     const userAgent = generateUserAgent()
+    console.log('setting user agent...')
     await page.setUserAgent(userAgent); // Using the generated User-Agent here
+    console.log('set user agent... going to page ')
         await page.goto('https://www.twitch.tv/thiccsnorlex', { timeout: 60000 }); // Increasing timeout to 60 seconds
         console.log(`#${count} BROWSER WATCHING STREAM.... MOVING TO NEXT BROWSER \n\n`);
+        currentIndex++;
     } catch (error) {
-        console.error(error);
-        count--
+        console.log(error);
         console.log(`Navigation FAILED with proxy: ${proxy}. Skipping to the next proxy. reducing count to ${count}`);
-        
+        count--
+        currentIndex++;
     }
-    currentIndex++;
     count++
 };
 
