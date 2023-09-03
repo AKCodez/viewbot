@@ -47,7 +47,6 @@ const ReleaseTheKraken = async () => {
     } catch (error) {
         console.log(error);
         console.log(`Navigation FAILED with proxy: ${proxy}. Skipping to the next proxy.`);
-        count--
         currentIndex++;
     }
 };
