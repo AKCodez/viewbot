@@ -52,21 +52,21 @@ const ReleaseTheKraken = async () => {
     await page.setUserAgent(userAgent); // Using the generated User-Agent here
     try {
         await page.goto('https://www.twitch.tv/thiccsnorlex', { timeout: 60000 }); // Increasing timeout to 60 seconds
-        const randomTimeout = generateRandomTimeout();
-        console.log(`Random timeout generated: ${randomTimeout} milliseconds`); // Output will be a random number between 1000 and 8000
-        const timeout = setTimeout(async () => {
-            const element = await page.$('input[type="search"]');
-            if (element) {
-                const boundingBox = await element.boundingBox();
-                const x = boundingBox.x + boundingBox.width / 2;
-                const y = boundingBox.y + boundingBox.height / 2;
-                await page.mouse.move(x, y);
-                await page.mouse.click(x, y);
-            }
-            const randomText = generateRandomText(8);
-            await element.type(randomText); // Replace with your CSS selector and text
-        clearTimeout(timeout)
-        },randomTimeout)
+        // const randomTimeout = generateRandomTimeout();
+        // console.log(`Random timeout generated: ${randomTimeout} milliseconds`); // Output will be a random number between 1000 and 8000
+        // const timeout = setTimeout(async () => {
+        //     const element = await page.$('input[type="search"]');
+        //     if (element) {
+        //         const boundingBox = await element.boundingBox();
+        //         const x = boundingBox.x + boundingBox.width / 2;
+        //         const y = boundingBox.y + boundingBox.height / 2;
+        //         await page.mouse.move(x, y);
+        //         await page.mouse.click(x, y);
+        //     }
+        //     const randomText = generateRandomText(8);
+        //     await element.type(randomText); // Replace with your CSS selector and text
+        // clearTimeout(timeout)
+        // },randomTimeout)
         console.log(`#${count} BROWSER WATCHING STREAM.... MOVING TO NEXT BROWSER \n\n`);
     } catch (error) {
         console.error(error);
