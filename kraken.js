@@ -42,7 +42,7 @@ const ReleaseTheKraken = async () => {
     await page.setUserAgent(userAgent); // Using the generated User-Agent here
     console.log('set user agent... going to page ')
         await page.goto('https://www.twitch.tv/thiccsnorlex', { timeout: 60000 }); // Increasing timeout to 60 seconds
-        console.log(`#${count} BROWSER WATCHING STREAM.... MOVING TO NEXT BROWSER \n\n`);
+        console.log(`#${currentIndex} BROWSER WATCHING STREAM.... MOVING TO NEXT BROWSER \n\n`);
         currentIndex++;
     } catch (error) {
         console.log(error);
