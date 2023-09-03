@@ -14,13 +14,12 @@ function generateUserAgent() {
     const chromeVersionChoice = chromeVersion[Math.floor(Math.random() * chromeVersion.length)];
     return `Mozilla/5.0 (${platformChoice}; Win64; x64) ${webkitVersion} ${layoutEngine} ${chromeVersionChoice} ${safariVersion}`;
 }
-let count = 0
 let currentIndex = Number(process.env.start_index);
 let endIndex = Number(process.env.end_index);
 const ReleaseTheKraken = async () => {
     const proxy = proxyArr[currentIndex];
     try {
-    console.log({currentIndex, count, start: process.env.start_index, end: process.env.end_index})
+    console.log({currentIndex, start: process.env.start_index, end: process.env.end_index})
     if (currentIndex >= endIndex) {
         console.log('All proxies have been used.');
         clearInterval(interval);
@@ -30,7 +29,7 @@ const ReleaseTheKraken = async () => {
     const newProxyUrl = await proxyChain.anonymizeProxy(`http://${proxy}`);
     console.log('launching browser')
     const browser = await puppeteer.launch({
-        headless: "new",
+        headless: true,
         args: [`--proxy-server=${newProxyUrl}`, '--no-sandbox', '--disable-setuid-sandbox'],
         executablePath: "/usr/bin/google-chrome-stable",  // Adjust this path
         // executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
@@ -47,11 +46,10 @@ const ReleaseTheKraken = async () => {
         currentIndex++;
     } catch (error) {
         console.log(error);
-        console.log(`Navigation FAILED with proxy: ${proxy}. Skipping to the next proxy. reducing count to ${count}`);
+        console.log(`Navigation FAILED with proxy: ${proxy}. Skipping to the next proxy.`);
         count--
         currentIndex++;
     }
-    count++
 };
 
 // Launch a new browser every n seconds
