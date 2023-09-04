@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk');
+require('dotenv').config()
 const secretAccessKey = process.env.secretAccessKey;
 const accessKeyId = process.env.accessKeyId;
 const url = process.env.url
