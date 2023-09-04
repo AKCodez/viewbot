@@ -52,6 +52,22 @@ const ReleaseTheKraken = async () => {
     }
 };
 
-// Launch a new browser every n seconds
-const n = 5; // Change this value to your desired time in seconds
-const interval = setInterval(ReleaseTheKraken, n * 1000);
+// Function to generate a random number between min and max
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Function to initiate the next interval
+function setRandomInterval(func, minInterval, maxInterval) {
+    setTimeout(() => {
+        func();
+        setRandomInterval(func, minInterval, maxInterval);
+    }, getRandomInt(minInterval, maxInterval));
+}
+
+// Define the minimum and maximum interval in milliseconds
+const minInterval = 5000;  // 5 seconds
+const maxInterval = 15000; // 15 seconds
+
+// Set the initial random interval
+setRandomInterval(ReleaseTheKraken, minInterval, maxInterval);
