@@ -5,26 +5,26 @@ const accessKeyId = process.env.accessKeyId;
 const url = process.env.url
 // Update our AWS Service Object to the desired region.
 AWS.config.update({
-    region: 'us-east-2',
+    region: 'us-east-1',
     accessKeyId,
     secretAccessKey,
 });
 const baseParams = {
-    ImageId: 'ami-0c55b159cbfafe1f0', // Amazon Linux 2 LTS
+    ImageId: 'ami-053b0d53c279acc90', // Amazon Linux 2 LTS
     InstanceType: 'c5.xlarge', // Upgraded from 't3.micro' to 'c5.xlarge'
-    KeyName: 'Joony', // Replace with your key pair name
+    KeyName: 'Joony1', // Replace with your key pair name
     MinCount: 1,
     MaxCount: 1,
-    SecurityGroupIds: ['sg-0173783397dff5fb7'] // Default security group
+    SecurityGroupIds: ['sg-0c8ec1f20e4339bd3'] // Default security group
 };
 // Create EC2 service object
 const ec2 = new AWS.EC2({ apiVersion: '2016-11-15' });
 
-const instancesToLaunch = 100;
+const instancesToLaunch = 50;
 const instanceParamsList = [];
 for (let i = 0; i < instancesToLaunch; i++) {
     const start_index = i * 10;
-    const end_index = start_index + 15;
+    const end_index = start_index + 10;
 
     // Here, we add UserData to run a script on startup. 
     // This is a base64 encoded string that specifies the environment variables.
@@ -71,7 +71,6 @@ for (let i = 0; i < instancesToLaunch; i++) {
     node kraken.js > /home/ubuntu/kraken.log 2>&1
     
   `).toString('base64');
-
     const instanceParams = { ...baseParams, UserData: userData };
     instanceParamsList.push(instanceParams);
 }
