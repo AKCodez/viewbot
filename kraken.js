@@ -84,10 +84,10 @@ const ReleaseTheKraken = async () => {
         await page.goto(process.env.url, { timeout: 60000 }); // Increasing timeout to 60 seconds
         console.log(`#${currentIndex} BROWSER WATCHING STREAM.... MOVING TO NEXT BROWSER \n\n`);
         // Wait for the "close-button" to appear and click it
-        const closeButton = await page.waitForSelector('button.close-button[aria-label="Close"]', { timeout: 10000 });
-        if (closeButton) {
-            await closeButton.click();
-        }
+        // const closeButton = await page.waitForSelector('button.close-button[aria-label="Close"]', { timeout: 10000 });
+        // if (closeButton) {
+        //     await closeButton.click();
+        // }
         currentIndex++;
         setTimeout(async () => {
             console.log(`Closing browser #${currentIndex} after 15 minutes.`);
