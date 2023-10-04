@@ -69,10 +69,10 @@ const ReleaseTheKraken = async () => {
         const newProxyUrl = await proxyChain.anonymizeProxy(`http://${proxy}`);
         console.log('launching browser')
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
             args: [`--proxy-server=${newProxyUrl}`, '--no-sandbox', '--disable-setuid-sandbox'],
-            // executablePath: "/usr/bin/google-chrome-stable",  // Adjust this path
-            executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+            executablePath: "/usr/bin/google-chrome-stable",  // Adjust this path
+            // executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
             ignoreHTTPSErrors: true,
         });
         console.log('navigating to page')
