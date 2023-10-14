@@ -3,7 +3,7 @@ require('dotenv').config()
 const secretAccessKey = process.env.secretAccessKey;
 const accessKeyId = process.env.accessKeyId;
 AWS.config.update({
-    region: 'us-east-2',
+    region: 'us-east-1',
     accessKeyId,
     secretAccessKey,
 });

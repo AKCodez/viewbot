@@ -142,6 +142,8 @@ const launchAllInstances = async () => {
 
 // Execute the function to launch instances
 launchAllInstances().catch(console.error);
+// ssh into ec2 (add ip address after @)
+// ssh -i "Joony1.pem" ubuntu@
 // get logs
 // cat /var/log/cloud-init-output.log
 // tail -f /var/log/user-data.log
